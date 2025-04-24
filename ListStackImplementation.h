@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <list>
 #include "StackImplementation.h"
+#include "List.h"
 
 
 class ListStackImplementation : public IStackImplementation
@@ -29,5 +29,5 @@ public:
     void reverse() override;
     ListStackImplementation* clone() const override;
 private:
-    std::list<ValueType> data;
+    List data;
 };

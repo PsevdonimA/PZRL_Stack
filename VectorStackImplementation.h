@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
 #include "StackImplementation.h"
+#include "Vector.h"
 
 
 class VectorStackImplementation : public IStackImplementation
@@ -29,5 +29,5 @@ public:
     void reverse() override;
     VectorStackImplementation* clone() const override;
 private:
-    std::vector<ValueType> data;
+    Vector data;
 };

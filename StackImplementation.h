@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include "Stack.h"
 
-using ValueType = double;
 
 // интерфейс для конкретных реализаций контейнера для стека
 class IStackImplementation {

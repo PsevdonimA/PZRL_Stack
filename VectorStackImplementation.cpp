@@ -1,11 +1,11 @@
 #include <iostream>
-#include <vector>
 #include "VectorStackImplementation.h"
+#include "Vector.h"
 
 VectorStackImplementation::VectorStackImplementation(){}
 VectorStackImplementation::VectorStackImplementation(const ValueType* valueArray, const size_t arraySize)
 {
-    data.insert(data.begin(), valueArray, valueArray + arraySize);
+    data.insert(valueArray, arraySize, 0);
 }
 
 VectorStackImplementation::VectorStackImplementation(const VectorStackImplementation& copyStack)
@@ -15,7 +15,7 @@ VectorStackImplementation::VectorStackImplementation(const VectorStackImplementa
         return;
     }
     data.clear();
-    data.insert(data.begin(), copyStack.data.begin(), copyStack.data.end());
+    data.insert(copyStack.data, 0);
 }
 VectorStackImplementation& VectorStackImplementation::operator=(const VectorStackImplementation& copyStack)
 {
@@ -24,7 +24,7 @@ VectorStackImplementation& VectorStackImplementation::operator=(const VectorStac
         return *this;
     }
     data.clear();
-    data.insert(data.begin(), copyStack.data.begin(), copyStack.data.end());
+    data.insert(copyStack.data, 0);
     return *this;
 }
 
@@ -35,7 +35,7 @@ VectorStackImplementation::VectorStackImplementation(VectorStackImplementation&&
         return;
     }
     data.clear();
-    data.insert(data.begin(), moveStack.data.begin(), moveStack.data.end());
+    data.insert(moveStack.data, 0);
     moveStack.data.clear();
 }
 VectorStackImplementation& VectorStackImplementation::operator=(VectorStackImplementation&& moveStack) noexcept
@@ -45,7 +45,7 @@ VectorStackImplementation& VectorStackImplementation::operator=(VectorStackImple
         return *this;
     }
     data.clear();
-    data.insert(data.begin(), moveStack.data.begin(), moveStack.data.end());
+    data.insert(moveStack.data, 0);
     moveStack.data.clear();
     return *this;
 }
@@ -53,11 +53,11 @@ VectorStackImplementation& VectorStackImplementation::operator=(VectorStackImple
 
 void VectorStackImplementation::push(const ValueType& value)
 {
-    data.push_back(value);
+    data.pushBack(value);
 }
 void VectorStackImplementation::pop()
 {
-    data.pop_back();
+    data.popBack();
 }
 const ValueType& VectorStackImplementation::top() const
 {
@@ -91,7 +91,7 @@ void VectorStackImplementation::reverse()
     data.clear();
     for (size_t i = 0; i < n; i++)
     {
-        data.push_back(arr[i]);
+        data.pushBack(arr[i]);
     }
 }
 

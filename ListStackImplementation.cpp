@@ -1,11 +1,11 @@
 #include <iostream>
-#include <list>
 #include "ListStackImplementation.h"
+#include "List.h"
 
 ListStackImplementation::ListStackImplementation(){}
 ListStackImplementation::ListStackImplementation(const ValueType* valueArray, const size_t arraySize)
 {
-    data.insert(data.begin(), valueArray, valueArray + arraySize);
+    data.insert(valueArray, arraySize, 0);
 }
 
 ListStackImplementation::ListStackImplementation(const ListStackImplementation& copyStack)
@@ -15,7 +15,7 @@ ListStackImplementation::ListStackImplementation(const ListStackImplementation& 
         return;
     }
     data.clear();
-    data.insert(data.begin(), copyStack.data.begin(), copyStack.data.end());
+    data.insert(copyStack.data, 0);
 }
 ListStackImplementation& ListStackImplementation::operator=(const ListStackImplementation& copyStack)
 {
@@ -24,7 +24,7 @@ ListStackImplementation& ListStackImplementation::operator=(const ListStackImple
         return *this;
     }
     data.clear();
-    data.insert(data.begin(), copyStack.data.begin(), copyStack.data.end());
+    data.insert(copyStack.data, 0);
     return *this;
 }
 
@@ -35,7 +35,7 @@ ListStackImplementation::ListStackImplementation(ListStackImplementation&& moveS
         return;
     }
     data.clear();
-    data.insert(data.begin(), moveStack.data.begin(), moveStack.data.end());
+    data.insert(moveStack.data, 0);
     moveStack.data.clear();
 }
 ListStackImplementation& ListStackImplementation::operator=(ListStackImplementation&& moveStack) noexcept
@@ -45,7 +45,7 @@ ListStackImplementation& ListStackImplementation::operator=(ListStackImplementat
         return *this;
     }
     data.clear();
-    data.insert(data.begin(), moveStack.data.begin(), moveStack.data.end());
+    data.insert(moveStack.data, 0);
     moveStack.data.clear();
     return *this;
 }
@@ -53,17 +53,15 @@ ListStackImplementation& ListStackImplementation::operator=(ListStackImplementat
 
 void ListStackImplementation::push(const ValueType& value)
 {
-    data.push_back(value);
+    data.pushBack(value);
 }
 void ListStackImplementation::pop()
 {
-    data.pop_back();
+    data.popBack();
 }
 const ValueType& ListStackImplementation::top() const
 {
-    auto it = data.begin();
-    advance(it, data.size()-1);
-    return *it;
+    return data[data.size()-1];
 }
 bool ListStackImplementation::isEmpty() const
 {
@@ -86,16 +84,14 @@ void ListStackImplementation::reverse()
 {
     size_t n = data.size();
     ValueType arr[n];
-    auto it = data.begin();
     for (size_t i = 0; i < n; i++)
     {
-        arr[n - i - 1] = *it;
-        advance(it, 1);
+        arr[n - i - 1] = data[i];
     }
     data.clear();
     for (size_t i = 0; i < n; i++)
     {
-        data.push_back(arr[i]);
+        data.pushBack(arr[i]);
     }
 }
 
