@@ -50,7 +50,7 @@ private:
     Node(const ValueType& value) : data(value) {}
     ~Node()
     {
-        delete next;
+        //delete next;
     }
 
     Node* next = nullptr;

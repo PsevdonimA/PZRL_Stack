@@ -185,7 +185,7 @@ void List::popBack()
     }
     else if (_size == 1)
     {
-        //delete _data;
+        delete _data;
         _data = nullptr;
         _size = 0;
         return;
@@ -195,7 +195,7 @@ void List::popBack()
     {
         fnd = fnd->next;
     }
-    //delete fnd->next;
+    delete fnd->next;
     fnd->next = nullptr;
     _size--;
 }
@@ -207,7 +207,7 @@ void List::popFront()
         return;
     }
     Node* fnd = _data->next;
-    //delete _data;
+    delete _data;
     _data = fnd;
     _size--;
 }
@@ -244,7 +244,7 @@ void List::erase(size_t pos, size_t count)
         {
             Node* dlnd = fnd->next;
             fnd->next = dlnd->next;
-            //delete dlnd;
+            delete dlnd;
             _size--;
             if (fnd->next == nullptr)
             {
@@ -261,7 +261,6 @@ void List::clear()
         return;
     }
     erase(0, _size);
-    _data = nullptr;
     _size = 0;
 }
 
